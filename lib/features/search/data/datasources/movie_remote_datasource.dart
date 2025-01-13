@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cinesearch/core/error/exception.dart';
 import 'package:cinesearch/core/secrets/app_secrets.dart';
 import 'package:cinesearch/features/search/data/models/movie_model.dart';
@@ -10,31 +9,44 @@ abstract interface class SearchRemoteDatasource {
 }
 
 class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
-  final http.Client client;
-
-  SearchRemoteDatasourceImpl({required this.client});
   @override
   Future<List<MovieModel>> getAllSearchedMovies({required String query}) async {
+    print('in the remote data impl calling http');
     final url = Uri.parse(
-        'https://api.themoviedb.org/3/search/movie?api_key=${AppSecrets.apiKey}&query=$query');
+        'http://www.omdbapi.com/?s=$query&apikey=${AppSecrets.apiKey}');
+    print(url);
+
     try {
-      final response = await client.get(url);
+      final response = await http.get(url);
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final List results = data['results'];
 
-        return results
-            .map((movie) => MovieModel.fromMap({
-                  'title': movie['title'],
-                  'poster': movie['poster_path'],
-                  'releaseDate': movie['release_date'],
-                }))
-            .toList();
+        // Check for valid response and successful 'Response' flag from OMDb
+        if (data['Response'] == "True") {
+          final List results = data['Search'];
+
+          return results
+              .map((movie) => MovieModel.fromMap({
+                    'title': movie['Title'],
+                    'poster': movie['Poster'],
+                    'releaseDate': movie['Year'],
+                  }))
+              .toList();
+        } else {
+          // If the response from OMDb indicates an error, handle it more gracefully
+          throw ServerException(data['Error'] ?? 'Unknown error occurred');
+        }
       } else {
-        throw const ServerException('Failed to fetch movies');
+        // Handle non-200 HTTP status codes here
+        throw const ServerException('Failed to fetch movies from OMDb');
       }
     } catch (e) {
-      throw ServerException('Error fetching movies: $e');
+      // Print the error to debug
+      print(e.toString());
+
+      // Return a more detailed error message
+      throw ServerException('Error fetching movies: ${e.toString()}');
     }
   }
 }

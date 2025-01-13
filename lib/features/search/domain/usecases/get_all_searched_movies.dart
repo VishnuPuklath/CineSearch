@@ -11,6 +11,7 @@ class GetAllSearchedMoviesUsecase
   GetAllSearchedMoviesUsecase({required this.searchRepository});
   @override
   Future<Either<Failure, List<Movie>>> call(SearchParams params) {
+    print('calling usecase');
     return searchRepository.getAllSearchedMovies(query: params.query);
   }
 }

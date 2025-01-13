@@ -4,20 +4,18 @@ import 'package:cinesearch/features/search/domain/repositories/search_repository
 import 'package:cinesearch/features/search/domain/usecases/get_all_searched_movies.dart';
 import 'package:cinesearch/features/search/presentation/bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   _initSearch();
-  serviceLocator.registerLazySingleton(() => http.Client);
 }
 
 void _initSearch() {
   //Datasource
   serviceLocator
     ..registerFactory<SearchRemoteDatasource>(
-      () => SearchRemoteDatasourceImpl(client: serviceLocator()),
+      () => SearchRemoteDatasourceImpl(),
     )
     //repository
     ..registerFactory<SearchRepository>(

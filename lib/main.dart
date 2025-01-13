@@ -1,5 +1,6 @@
 import 'package:cinesearch/features/search/presentation/bloc/search_bloc.dart';
 import 'package:cinesearch/init_dependencies.dart';
+import 'package:cinesearch/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,10 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: ThemeData.dark(),
+      initialRoute: '/',
+      onGenerateRoute: generateRoute,
     );
   }
 }
