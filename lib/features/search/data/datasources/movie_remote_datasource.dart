@@ -5,14 +5,14 @@ import 'package:cinesearch/core/secrets/app_secrets.dart';
 import 'package:cinesearch/features/search/data/models/movie_model.dart';
 import 'package:http/http.dart' as http;
 
-abstract interface class MovieRemoteDatasource {
+abstract interface class SearchRemoteDatasource {
   Future<List<MovieModel>> getAllSearchedMovies({required String query});
 }
 
-class MovieRemoteDatasourceImpl implements MovieRemoteDatasource {
+class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
   final http.Client client;
 
-  MovieRemoteDatasourceImpl({required this.client});
+  SearchRemoteDatasourceImpl({required this.client});
   @override
   Future<List<MovieModel>> getAllSearchedMovies({required String query}) async {
     final url = Uri.parse(

@@ -6,7 +6,7 @@ import 'package:cinesearch/features/search/domain/repositories/search_repository
 import 'package:fpdart/fpdart.dart';
 
 class SearchRepositoryImpl implements SearchRepository {
-  final MovieRemoteDatasource remoteDatasource;
+  final SearchRemoteDatasource remoteDatasource;
 
   SearchRepositoryImpl({required this.remoteDatasource});
 
