@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:cinesearch/core/common/widgets/loader.dart';
-import 'package:cinesearch/features/search/domain/entitites/movie.dart';
 import 'package:cinesearch/features/search/presentation/bloc/search_bloc.dart';
 import 'package:cinesearch/features/search/presentation/widgets/build_error_widget.dart';
 import 'package:cinesearch/features/search/presentation/widgets/empty_space_widget.dart';
@@ -19,8 +17,7 @@ class SearchScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16.0), // Horizontal padding for better layout
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

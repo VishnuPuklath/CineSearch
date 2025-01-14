@@ -15,7 +15,7 @@ class SearchRepositoryImpl implements SearchRepository {
       {required String query}) async {
     try {
       final movies = await remoteDatasource.getAllSearchedMovies(query: query);
-      print('calling repository implementation');
+
       return right(movies);
     } on ServerException catch (e) {
       return left(Failure(e.message));

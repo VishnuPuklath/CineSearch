@@ -15,7 +15,7 @@ void _initSearch() {
   //Datasource
   serviceLocator
     ..registerFactory<SearchRemoteDatasource>(
-      () => SearchRemoteDatasourceImpl(),
+      () => OmdbRemoteDatasourceImpl(),
     )
     //repository
     ..registerFactory<SearchRepository>(

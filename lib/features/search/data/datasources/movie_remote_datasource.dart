@@ -8,10 +8,9 @@ abstract interface class SearchRemoteDatasource {
   Future<List<MovieModel>> getAllSearchedMovies({required String query});
 }
 
-class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
+class OmdbRemoteDatasourceImpl implements SearchRemoteDatasource {
   @override
   Future<List<MovieModel>> getAllSearchedMovies({required String query}) async {
-    print('in the remote data impl calling http');
     final url = Uri.parse(
         'http://www.omdbapi.com/?s=$query&apikey=${AppSecrets.apiKey}');
     print(url);
