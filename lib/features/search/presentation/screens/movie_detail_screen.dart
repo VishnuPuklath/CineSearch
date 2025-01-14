@@ -38,10 +38,10 @@ class MovieDetailPage extends StatelessWidget {
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 8),
-            // Text(
-            //   'Plot: ${movie.plot}',
-            //   style: const TextStyle(fontSize: 16),
-            // ),
+            Text(
+              'Type: ${movie.type}',
+              style: const TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),

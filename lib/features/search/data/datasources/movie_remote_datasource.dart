@@ -31,6 +31,7 @@ class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
                     'title': movie['Title'],
                     'poster': movie['Poster'],
                     'releaseDate': movie['Year'],
+                    'type': movie['Type'],
                   }))
               .toList();
         } else {
@@ -42,9 +43,6 @@ class SearchRemoteDatasourceImpl implements SearchRemoteDatasource {
         throw const ServerException('Failed to fetch movies from OMDb');
       }
     } catch (e) {
-      // Print the error to debug
-      print(e.toString());
-
       // Return a more detailed error message
       throw ServerException('Error fetching movies: ${e.toString()}');
     }
